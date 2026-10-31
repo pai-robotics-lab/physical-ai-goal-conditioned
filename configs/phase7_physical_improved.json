@@ -1,0 +1,29 @@
+{
+  "phase2_config": "configs/phase2_pick_place.json",
+  "phase3_config": "configs/phase3_dataset.json",
+  "phase4_config": "configs/phase7_training.json",
+  "model_state_dict": "models/phase7/train_2000/full_best_state_dict.pt",
+  "normalization": "models/phase7/train_2000/normalization.json",
+  "output_dir": "outputs/phase7/physical/improved",
+  "trial_count": 24,
+  "smoke_trial_count": 3,
+  "full_base_seed": 90000,
+  "smoke_base_seed": 89000,
+  "workspace_x_range_m": [0.38, 0.72],
+  "workspace_y_range_m": [-0.24, 0.10],
+  "minimum_prediction_confidence_margin_m": 0.0,
+  "transport_xy_tolerance_m": 0.06,
+  "placement_xy_tolerance_m": 0.05,
+  "support_height_tolerance_m": 0.012,
+  "stable_linear_speed_m_s": 0.025,
+  "stable_angular_speed_rad_s": 0.25,
+  "lift_height_threshold_m": 0.08,
+  "trial_schedule": [
+    ["red_cube", "left_bin"],
+    ["red_cube", "right_bin"],
+    ["blue_cube", "left_bin"],
+    ["blue_cube", "right_bin"],
+    ["green_cube", "left_bin"],
+    ["green_cube", "right_bin"]
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "phase5_config": "configs/phase5_online.json",
+  "phase5_results": "outputs/phase5/phase5_results.json",
+  "phase2_config": "configs/phase2_pick_place.json",
+  "phase3_config": "configs/phase3_dataset.json",
+  "phase4_config": "configs/phase4_training.json",
+  "model_state_dict": "models/phase4/full_best_state_dict.pt",
+  "normalization": "models/phase4/normalization.json",
+  "output_dir": "outputs/phase6",
+  "failure_trials": [1, 5, 10],
+  "sweep_source_trial": 1,
+  "sweep_offsets_mm": [-30, -20, -15, -10, -5, 0, 5, 10, 15, 20, 30],
+  "finger_closing_axis_world": "y",
+  "orthogonal_axis_world": "x",
+  "lift_height_threshold_m": 0.08
+}

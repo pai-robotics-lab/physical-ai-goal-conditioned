@@ -1,0 +1,55 @@
+{
+  "simulation": {
+    "dt_s": 0.01,
+    "substeps": 2,
+    "constraint_solver_iterations": 80,
+    "noslip_iterations": 4,
+    "settle_steps": 200
+  },
+  "scene": {
+    "table_size_m": [0.65, 0.70, 0.20],
+    "table_position_m": [0.55, 0.0, 0.10],
+    "cube_size_m": [0.05, 0.05, 0.05],
+    "cube_initial_position_m": [0.55, -0.12, 0.225],
+    "cube_target_position_m": [0.55, 0.16, 0.225],
+    "rigid_friction": 1.0,
+    "cube_density_kg_m3": 500.0
+  },
+  "robot": {
+    "initial_qpos_rad_m": [0.0, -0.3, 0.0, -2.0, 0.0, 1.7, 0.8, 0.04, 0.04],
+    "downward_quaternion_wxyz": [0.0, 1.0, 0.0, 0.0],
+    "gripper_open_m": 0.04,
+    "gripper_close_force_n": -1.0,
+    "kp": [4500, 4500, 3500, 3500, 2000, 2000, 2000, 100, 100],
+    "kv": [450, 450, 350, 350, 200, 200, 200, 10, 10],
+    "force_lower_n": [-87, -87, -87, -87, -12, -12, -12, -100, -100],
+    "force_upper_n": [87, 87, 87, 87, 12, 12, 12, 100, 100]
+  },
+  "motion": {
+    "pregrasp_hand_position_m": [0.55, -0.12, 0.48],
+    "grasp_hand_position_m": [0.55, -0.12, 0.335],
+    "lift_hand_position_m": [0.55, -0.12, 0.53],
+    "transport_hand_position_m": [0.55, 0.16, 0.53],
+    "place_hand_position_m": [0.55, 0.16, 0.335],
+    "retreat_hand_position_m": [0.55, 0.16, 0.50],
+    "initial_steps": 100,
+    "move_steps": 160,
+    "descend_steps": 120,
+    "close_steps": 100,
+    "lift_steps": 160,
+    "transport_steps": 180,
+    "place_steps": 140,
+    "open_steps": 100,
+    "retreat_steps": 140
+  },
+  "evaluation": {
+    "trial_count": 10,
+    "base_seed": 2400,
+    "lift_height_threshold_m": 0.08,
+    "transport_xy_tolerance_m": 0.06,
+    "placement_xy_tolerance_m": 0.05,
+    "support_height_tolerance_m": 0.012,
+    "stable_linear_speed_m_s": 0.025,
+    "stable_angular_speed_rad_s": 0.25
+  }
+}

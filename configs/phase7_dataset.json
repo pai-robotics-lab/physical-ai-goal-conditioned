@@ -1,0 +1,63 @@
+{
+  "simulation": {
+    "dt_s": 0.01,
+    "substeps": 2,
+    "settle_steps": 40,
+    "max_linear_speed_m_s": 0.02,
+    "support_height_tolerance_m": 0.008
+  },
+  "scene": {
+    "table_size_m": [0.65, 0.70, 0.20],
+    "table_position_m": [0.55, 0.0, 0.10],
+    "cube_size_m": [0.05, 0.05, 0.05],
+    "cube_density_kg_m3": 500.0,
+    "rigid_friction": 1.0,
+    "placement_x_range_m": [0.40, 0.70],
+    "placement_y_range_m": [-0.22, 0.08],
+    "minimum_center_separation_m": 0.10,
+    "placement_attempts": 200,
+    "scene_retries": 5
+  },
+  "objects": [
+    {"class": "red_cube", "color_name": "red", "rgba": [0.90, 0.10, 0.08, 1.0]},
+    {"class": "blue_cube", "color_name": "blue", "rgba": [0.08, 0.30, 0.92, 1.0]},
+    {"class": "green_cube", "color_name": "green", "rgba": [0.08, 0.72, 0.20, 1.0]}
+  ],
+  "camera": {
+    "resolution": [640, 480],
+    "position_m": [1.25, -1.10, 1.05],
+    "lookat_m": [0.53, -0.04, 0.22],
+    "up": [0.0, 0.0, 1.0],
+    "fov_deg": 43.0
+  },
+  "grasp": {
+    "approach": "vertical_top_down",
+    "hand_quaternion_wxyz": [0.0, 1.0, 0.0, 0.0],
+    "hand_to_cube_center_z_offset_m": 0.110,
+    "pregrasp_to_cube_center_z_offset_m": 0.255,
+    "source_phase": "phase2_10_of_10_success"
+  },
+  "destinations": [
+    {"id": "left_bin", "instruction_name": "left bin", "world_position_m": [0.42, 0.22, 0.225]},
+    {"id": "right_bin", "instruction_name": "right bin", "world_position_m": [0.68, 0.22, 0.225]}
+  ],
+  "dataset": {
+    "base_seed": 70000,
+    "smoke_scene_count": 10,
+    "full_scene_count": 2500,
+    "minimum_visible_pixels": 100,
+    "overlay_scene_count": 5,
+    "split_ratios": {"train": 0.8, "validation": 0.1, "test": 0.1},
+    "split_seed_offset": 1777,
+    "excluded_seed_ranges": [
+      [31000, 31499],
+      [51000, 51002],
+      [52000, 52009]
+    ]
+  },
+  "robot": {
+    "initial_qpos_rad_m": [0.0, -0.3, 0.0, -2.0, 0.0, 1.7, 0.8, 0.04, 0.04],
+    "kp": [4500, 4500, 3500, 3500, 2000, 2000, 2000, 100, 100],
+    "kv": [450, 450, 350, 350, 200, 200, 200, 10, 10]
+  }
+}
