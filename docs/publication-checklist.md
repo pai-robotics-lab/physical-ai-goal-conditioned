@@ -43,7 +43,7 @@
 ## 公開前に所有者が判断・実施する項目
 
 - [x] 新テーマ版動画をYouTubeへアップロードし、READMEを提出用URLへ更新した
-- [ ] GitHubで公開対象の最終diffとコミット作者情報を確認する
+- [x] GitHubで公開対象の最終diffとコミット作者情報を確認した
 - [ ] 講座規約が生成データ・モデル・Genesis画面の公開を許可するか確認する
 - [ ] 必要なら動画へ音声、字幕、BGMを追加し、その素材ライセンスを確認する
 
@@ -76,8 +76,8 @@
 ### GitHub
 
 - [x] 公開先候補を`pai-robotics-lab/physical-ai-goal-conditioned`とした
-- [ ] GitHubリポジトリがPublicであることをログアウト状態で確認する
-- [ ] 最終差分をコミット・Pushし、READMEとPDFが新テーマ版であることを確認する
+- [x] GitHubリポジリがPublicであることを匿名HTTPアクセスで確認した
+- [x] 最終差分をコミット・Pushし、README・ソースコード・PDFを匿名取得できることを確認した
 - [ ] 採点に必要な期間はPublicを維持する
 
 ### OmniCampus入力・送信前確認
@@ -96,4 +96,4 @@
 - [ ] `レポートが提出されました`の表示と提出日時を確認し、受付記録を保存する
 - [ ] 再提出時は最後にアップロードした内容だけが採点対象になることを確認する
 
-YouTubeアップロードは完了した。GitHub Push、GitHub公開設定変更、OmniCampus提出は未実施。
+YouTubeアップロードとGitHub Pushは完了した。GitHubは既存のPublic設定を維持し、公開設定の変更は行っていない。OmniCampus提出は未実施。
