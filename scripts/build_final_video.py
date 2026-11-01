@@ -60,7 +60,7 @@ def _card(path: Path, title: str, lines: list[str], image_path: Path | None = No
         draw.rectangle((x - 2, image_y - 2, x + image.width + 2, image_y + image.height + 2), outline="#7fcdbb", width=3)
     draw.text(
         (70, 670),
-        "Goal-Conditioned Visual Robotic Manipulation",
+        "Vision-Based Panda Grasping and Transport",
         font=_font(FONT_REGULAR, 18),
         fill="#7fa6bf",
     )
@@ -132,21 +132,21 @@ def build() -> Path:
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     _card(
         CARDS / "01_title.png",
-        "視覚・目標条件付きAIによる自律物体操作",
+        "視覚AIを用いたPandaロボットアームの物体把持・搬送",
         [
-            "RGB画像と目標指示から把持位置を推定",
-            "Franka Pandaが物理接触で把持・搬送・配置",
-            "学習データ拡張による物理成功率の改善",
+            "CNNがRGB画像と構造化IDから把持位置XYを推定",
+            "固定状態機械・IK・把持力制御で物理操作",
+            "追加評価として学習データ量と物理成功率を比較",
         ],
     )
     _card(
         CARDS / "02_system.png",
-        "Goal-conditioned Physical AI",
+        "視覚AIと従来型制御の役割",
         [
             "入力: RGB + 対象色ID + 搬送先ID",
-            "出力: ワールド座標の把持位置XY",
+            "AI出力: ワールド座標の把持位置XYのみ",
             "49,366パラメータの小型CNN",
-            "推論に真値・Segmentationは不使用",
+            "軌道・把持力・搬送先選択は従来型制御",
         ],
         ROOT / "docs" / "assets" / "final" / "improved_model_trial01_prediction.png",
     )
@@ -159,7 +159,7 @@ def build() -> Path:
     _card(
         CARDS / "06_physical.png",
         "同一24配置の物理操作評価",
-        ["旧モデル: 15/24 = 62.5%", "改善モデル: 24/24 = 100%", "初期物体位置差: 0.0 mm"],
+        ["旧モデル: 15/24 = 62.5%", "改善モデル: 24/24 = 100%", "同一の固定制御器で比較"],
         ROOT / "docs" / "assets" / "final" / "physical_success_comparison.png",
     )
     _card(
@@ -174,7 +174,7 @@ def build() -> Path:
     segments = [SEGMENTS / f"segment_{index:02d}.mp4" for index in range(1, 8)]
     _still_segment(CARDS / "01_title.png", 8, segments[0])
     _still_segment(CARDS / "02_system.png", 9, segments[1])
-    _raw_segment(RECORDINGS / "improved_trial01.mp4", "IMPROVED MODEL - AUTONOMOUS PICK AND PLACE", segments[2])
+    _raw_segment(RECORDINGS / "improved_trial01.mp4", "VISION AI + FIXED ROBOT CONTROL", segments[2])
     _comparison_segment(
         RECORDINGS / "old_trial01.mp4", RECORDINGS / "improved_trial01.mp4", segments[3]
     )

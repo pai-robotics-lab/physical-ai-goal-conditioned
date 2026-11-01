@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "physical-ai-goal-conditioned"
 version = "0.1.0"
-description = "Goal-conditioned vision and manipulation system using Genesis and Franka Panda"
+description = "Vision-based grasp localization and Panda manipulation using Genesis"
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.10,<3.11"

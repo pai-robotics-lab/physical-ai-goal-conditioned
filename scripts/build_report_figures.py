@@ -65,22 +65,41 @@ def build_system_overview() -> None:
     draw = ImageDraw.Draw(image)
     draw.text(
         (55, 35),
-        "Goal-conditioned Physical AI システム構成",
+        "視覚AIと従来型制御のシステム構成",
         font=_font(40, True),
         fill=NAVY,
     )
     _box(draw, (60, 145, 380, 330), "入力1: RGB画像", ["Genesis固定カメラ", "640×480 → 160×120"])
-    _box(draw, (60, 405, 380, 590), "入力2: 目標指示", ["対象色ID: 3クラス", "搬送先ID: 2クラス"])
-    _box(draw, (500, 215, 850, 520), "視覚AI", ["色条件付き空間CNN", "Attention + Embedding", "把持位置XYを回帰"], LIGHT_GREEN)
-    _box(draw, (970, 215, 1280, 520), "従来制御", ["範囲外予測を棄却", "Panda IK・関節補間", "二指グリッパー制御"], LIGHT_ORANGE)
+    _box(
+        draw,
+        (60, 405, 380, 590),
+        "入力2: 構造化ID",
+        ["対象色ID → 視覚AI", "搬送先ID → CNN補助入力", "搬送先ID → 状態機械"],
+    )
+    _box(
+        draw,
+        (500, 215, 850, 520),
+        "視覚AI",
+        ["色条件付き空間CNN", "Attention + Embedding", "出力は把持位置XYのみ"],
+        LIGHT_GREEN,
+    )
+    _box(
+        draw,
+        (970, 215, 1280, 520),
+        "従来型制御",
+        ["搬送先の既定座標を選択", "Panda IK・関節補間", "把持力・動作タイミング"],
+        LIGHT_ORANGE,
+    )
     _box(draw, (1400, 215, 1735, 520), "物理操作", ["把持 → 持ち上げ", "搬送 → 配置 → 解放", "Genesis物理接触のみ"], LIGHT_GREEN)
     _arrow(draw, (380, 238), (500, 300))
     _arrow(draw, (380, 495), (500, 430))
+    draw.line((380, 535, 900, 535), fill=BLUE, width=6)
+    _arrow(draw, (900, 535), (970, 475))
     _arrow(draw, (850, 368), (970, 368))
     _arrow(draw, (1280, 368), (1400, 368))
     draw.text(
         (490, 585),
-        "推論入力に真値座標・Segmentation・scene IDは使用しない",
+        "AIは関節軌道を生成しない / 真値・Segmentation・scene IDは推論に不使用",
         font=_font(25, True),
         fill=GREEN,
     )
@@ -92,7 +111,7 @@ def build_model_architecture() -> None:
     draw = ImageDraw.Draw(image)
     draw.text(
         (55, 35),
-        "49,366パラメータ Goal-conditioned CNN",
+        "49,366パラメータ 把持位置推定CNN",
         font=_font(40, True),
         fill=NAVY,
     )
@@ -104,7 +123,12 @@ def build_model_architecture() -> None:
     _arrow(draw, (925, 235), (1030, 235))
     _arrow(draw, (1450, 235), (1525, 235))
 
-    _box(draw, (90, 520, 455, 710), "構造化指示", ["対象色ID → 8次元", "搬送先ID → 4次元", "搬送先は出力条件を付与"])
+    _box(
+        draw,
+        (90, 520, 455, 710),
+        "構造化ID",
+        ["対象色ID → 8次元", "搬送先ID → 4次元", "左右で教師把持XYは同一"],
+    )
     _box(draw, (610, 480, 1050, 760), "特徴結合: 112次元", ["色map重心 2", "Attention座標 2", "局所48 + 全体48", "色Embedding 8", "搬送先Embedding 4"], LIGHT_GREEN)
     _box(draw, (1210, 480, 1580, 760), "回帰MLP: 22,850 params", ["Linear 112→128 + ReLU", "Dropout p=0.1", "Linear 128→64 + ReLU", "Linear 64→2 + Tanh"], LIGHT_ORANGE)
     _box(draw, (1660, 520, 1850, 710), "出力", ["正規化XY", "[-1, 1]", "→ world m"])
@@ -148,7 +172,7 @@ def build_dataset_example() -> None:
     draw = ImageDraw.Draw(canvas)
     draw.text(
         (55, 35),
-        "同一RGB画像から生成する6つのGoal-conditioned教師サンプル",
+        "同一RGB画像から生成する6つの構造化指示サンプル",
         font=_font(38, True),
         fill=NAVY,
     )
@@ -160,7 +184,7 @@ def build_dataset_example() -> None:
     )
     draw.text(
         (55, 830),
-        "画像は6サンプルで共通。色IDが対象物、搬送先IDが目標を指定する。",
+        "画像は6サンプルで共通。対象色IDが把持対象、搬送先IDが既定搬送先を指定する。",
         font=_font(22),
         fill=GRAY,
     )
@@ -193,8 +217,14 @@ def build_dataset_example() -> None:
     )
     draw.text(
         (85, 990),
-        "推論入力: RGB + 対象色ID + 搬送先IDのみ（真値・mask・scene IDは不使用）",
+        "左右搬送先で教師把持XYは同一。異なる把持位置教師は1シーン3点。",
         font=_font(24),
+        fill=GRAY,
+    )
+    draw.text(
+        (85, 1025),
+        "推論入力: RGB + 対象色ID + 搬送先ID（真値・mask・scene IDは不使用）",
+        font=_font(21),
         fill=GRAY,
     )
     canvas.save(OUTPUT / "dataset_six_instructions_ja.png")

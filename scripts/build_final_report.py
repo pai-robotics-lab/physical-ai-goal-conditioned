@@ -255,7 +255,7 @@ def _page(canvas, document) -> None:  # type: ignore[no-untyped-def]
     canvas.line(22 * mm, 16 * mm, 188 * mm, 16 * mm)
     canvas.setFont("Helvetica", 8)
     canvas.setFillColor(colors.HexColor("#526777"))
-    canvas.drawString(22 * mm, 10 * mm, "Goal-Conditioned Visual Robotic Manipulation")
+    canvas.drawString(22 * mm, 10 * mm, "Vision-Based Panda Grasping and Transport")
     canvas.drawRightString(188 * mm, 10 * mm, str(document.page))
     canvas.restoreState()
 
@@ -269,13 +269,13 @@ def build() -> Path:
         rightMargin=22 * mm,
         topMargin=20 * mm,
         bottomMargin=22 * mm,
-        title="視覚・目標条件付きAIによるロボットアームの自律物体操作と学習データ拡張による把持性能改善",
+        title="視覚AIを用いたPandaロボットアームの物体把持・搬送",
         author="Physical AI project",
     )
     story: list[object] = [Spacer(1, 25 * mm)]
     story.append(
         Paragraph(
-            "視覚・目標条件付きAIによる<br/>ロボットアームの自律物体操作と<br/>学習データ拡張による把持性能改善",
+            "視覚AIを用いた<br/>Pandaロボットアームの<br/>物体把持・搬送",
             ParagraphStyle(
                 "CoverTitle",
                 fontName="HeiseiKakuGo-W5",
@@ -289,7 +289,7 @@ def build() -> Path:
     story.append(Spacer(1, 10 * mm))
     story.append(
         Paragraph(
-            "Goal-Conditioned Visual Robotic Manipulation:<br/>Improving Physical Task Success through Data Scaling",
+            "Vision-Based Object Grasping and Transport<br/>with a Franka Panda",
             ParagraphStyle(
                 "CoverEnglish",
                 fontName="Helvetica",
@@ -303,8 +303,8 @@ def build() -> Path:
     story.append(Spacer(1, 20 * mm))
     summary = Table(
         [
-            ["Common Test mean error", "Paired physical success", "Model size"],
-            ["12.48 -> 2.14 mm", "62.5% -> 100%", "49,366 parameters"],
+            ["AI output", "Robot control", "Paired physical success"],
+            ["Grasp position XY", "Fixed state machine + IK", "15/24 -> 24/24"],
         ],
         colWidths=[54 * mm] * 3,
     )
@@ -327,12 +327,12 @@ def build() -> Path:
     story.append(summary)
     story.append(Spacer(1, 28 * mm))
     story.append(Paragraph("Physical AI応用1 最終課題", STYLES["caption"]))
-    story.append(Paragraph("実施日: 2026-10-31", STYLES["caption"]))
+    story.append(Paragraph("実験日: 2026-10-31 / 改訂日: 2026-11-01", STYLES["caption"]))
     story.append(PageBreak())
     story.append(Paragraph("目次", STYLES["h2"]))
     for title in [
         "1. 背景と研究目的",
-        "2. Goal-conditioned Physical AIのシステム構成",
+        "2. 視覚AIによる位置推定と従来型ロボット制御",
         "3. GenesisとFranka Pandaの物理シミュレーション",
         "4. 自作CNNの構造と学習データ",
         "5. 学習データ量による位置推定精度の比較",

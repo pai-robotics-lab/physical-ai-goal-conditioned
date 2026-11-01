@@ -83,6 +83,15 @@ def verify() -> dict[str, Any]:
         "127.825",
     )
     assert all(value in published_text for value in required_values)
+    required_explanations = (
+        "視覚AIを用いたPandaロボットアームの物体把持・搬送",
+        "把持位置XY",
+        "搬送先ID",
+        "従来型制御",
+        "Data Scaling",
+    )
+    assert all(text in published_text for text in required_explanations)
+    assert "Goal-Conditioned Visual Robotic Manipulation" not in published_text
 
     return {
         "offline_models_checked": list(expected_offline),
@@ -94,6 +103,7 @@ def verify() -> dict[str, Any]:
             model: round(value, 3) for model, value in phase4_expected.items()
         },
         "published_values_present": True,
+        "published_role_explanations_present": True,
     }
 
 
